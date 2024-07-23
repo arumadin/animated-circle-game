@@ -1,33 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    margin: 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.board {
+    width: 100vw;
+    height: 100vh;
+    border: 10px solid #FD7FAA;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.circle {
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    animation: bounce 0.2s ease-in-out forwards;
+}
+
+.instruction {
+    margin: 20px 10px;
+    width: fit-content;
+    color: #0b1957;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    width: fit-content;
+}
+
+.controls button {
+    border: 0;
+    padding: 10px 15px;
+    background-color: #FFDBD1;
+    color: #0b1957;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.controls button:active {
+    transform: scale(0.9);
+}
+
+.controls button:disabled,
+.controls button[disabled] {
+    background-color: #f4f2ef;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@keyframes bounce {
+    from {
+        width: 0px;
+        height: 0px;
+    }
+
+    to {
+        width: 30px;
+        height: 30px;
+    }
+    
 }
