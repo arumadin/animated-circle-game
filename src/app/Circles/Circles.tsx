@@ -1,10 +1,21 @@
 import React from 'react'
 
+type CircleProps = {
+    x: number
+    y: number
+    bgColor: string
+    id: number
+}
+
+type CircleArrProps = {
+    circles: (CircleProps|undefined)[]
+}
+
 const Circle = ({
     x,
     y,
     bgColor
-}) => {
+}: CircleProps) => {
     return (
         <div
             className='circle'
@@ -20,10 +31,10 @@ const Circle = ({
 
 }
 
-function Circles({circles}) {
+function Circles(props: CircleArrProps ) {
   return (
-    circles.map(circle => {
-        return <Circle key={circle.id} {...circle}></Circle>
+    props.circles.map(circle => {
+        return circle && <Circle key={circle.id} {...circle}></Circle>
     })
   )
 }

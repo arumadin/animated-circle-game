@@ -1,4 +1,11 @@
 import React from 'react'
+type ControlProps = {
+  onUndo: () => void
+  onRedo: () => void
+  onReset: () => void
+  hasCircle: boolean
+  hasHistory: boolean
+}
 
 function Controls({
   onUndo, 
@@ -6,7 +13,7 @@ function Controls({
   onReset,
   hasCircle,
   hasHistory
-  }) {
+  }: ControlProps) {
   return (
     <div className='controls' onClick={(e) => {
       e.stopPropagation();

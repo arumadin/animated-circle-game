@@ -2,7 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import Circles from '../Circles/Circles';
 import Controls from '../Controls/Controls';
-import { COLORS } from '../constants.js';
+import { COLORS } from '../constants';
+
+type CircleProps = {
+  x: number
+  y: number
+  bgColor: string
+  id: number
+}
 
 const getRandomColor = () => {
   const randomIdx = Math.floor(Math.random() * COLORS.length);
@@ -10,10 +17,10 @@ const getRandomColor = () => {
 }
 
 function Board() {
-    const [circles, setCircles] = useState([]);
-    const [history, setHistory] = useState([]);
+    const [circles, setCircles] = useState<(CircleProps | undefined)[]>([]);
+    const [history, setHistory] = useState<(CircleProps | undefined)[]>([]);
 
-    const handleClick = (e) => {
+    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         setCircles(prev => {
             return [...prev, 
                 {x: e.clientX, 
@@ -27,9 +34,9 @@ function Board() {
     const handleUndo = () => {
       // remove the last added circle
       const copyCircles = [...circles];
-      const lastCircle = copyCircles.pop();
+      const lastCircle= copyCircles.pop();
 
-      setHistory(prev => [...prev, lastCircle])
+      setHistory((prev) => [...prev, lastCircle])
       setCircles(copyCircles)
     }
 
@@ -39,7 +46,7 @@ function Board() {
       const copyHistory = [...history];
       const lastCircle = copyHistory.pop();
 
-      setCircles(prev => [...prev, lastCircle])
+      setCircles((prev) => [...prev, lastCircle])
       setHistory(copyHistory)
     }
 
